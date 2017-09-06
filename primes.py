@@ -23,7 +23,7 @@ class Sieve:
     self.sieve = [2]
 
   def _is_prime(self, n):
-    return all(n % p != 0 for p in self.sieve)
+    return all(n % p != 0 for p in self.sieve[:self.indexof(sqrt(n))])
 
   def _add_primes_until_value(self, n):
     candidate = self.sieve[-1] + 1
