@@ -3,28 +3,19 @@ from primes import Sieve
 from math import sqrt
 
 sieve = Sieve()
-candidate = 2
 
 def check_is_goldbachy(n):
-  for p in sieve.primes(prime):
-    root = sqrt((candidate - p) / 2)
+  for p in sieve.primes(n):
+    root = sqrt((n - p) / 2)
     if root == int(root):
       return
 
-  print '%d is not goldbachy!' % candidate
+  print '%d is not goldbachy!' % n
   sys.exit(0)
 
-for prime in sieve.primes():
-  while candidate < prime:
-    if candidate % 2 == 0:
-      candidate += 1
-      continue
+for n in sieve.composites():
+  if n % 2 == 1:
+    if n % 1000 == 1:
+      print n
 
-    if candidate % 1000 == 1:
-      print candidate
-
-    check_is_goldbachy(candidate)
-    candidate += 1
-
-  # skip over prime
-  candidate += 2
+    check_is_goldbachy(n)

@@ -41,5 +41,13 @@ class TestPrimes(unittest.TestCase):
     self.assertEqual([], list(sieve.primes(4, 3)))
     self.assertEqual([5, 7, 11], list(sieve.primes(4, 12)))
 
+  def test_sieve_composites(self):
+    sieve = Sieve()
+
+    self.assertEqual([4, 6, 8], list(itertools.islice(sieve.composites(), 0, 3)))
+    self.assertEqual([4, 6, 8, 9, 10], list(sieve.composites(12)))
+    self.assertEqual([], list(sieve.composites(4, 3)))
+    self.assertEqual([8, 9, 10], list(sieve.composites(7, 12)))
+
 if __name__ == '__main__':
   unittest.main()

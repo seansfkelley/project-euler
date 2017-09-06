@@ -54,7 +54,7 @@ class Sieve:
     self._add_primes_until_index(i - 1)
     return self.sieve[i - 1]
 
-  def primes(self, *args):
+  def _range_args(self, *args):
     if len(args) == 0:
       start, stop = 2, None
     elif len(args) == 1:
@@ -69,7 +69,15 @@ class Sieve:
     elif stop is not None and int(stop) != stop:
       raise ValueError('stop value must be an integer')
 
+    return start, stop
+
+  def primes(self, *args):
+    start, stop = self._range_args(*args)
     return PrimeIterator(start, stop, self)
+
+  def composites(self, *args):
+    start, stop = self._range_args(*args)
+    return CompositeIterator(start, stop, self)
 
 class PrimeIterator:
   def __init__(self, start, stop, sieve):
@@ -86,5 +94,22 @@ class PrimeIterator:
       yield p
       i += 1
       p = self.sieve.nth(i)
+
+    raise StopIteration()
+
+class CompositeIterator:
+  def __init__(self, start, stop, sieve):
+    self.primes = sieve.primes(start, stop)
+
+  def __iter__(self):
+    n = None
+    for prime in self.primes:
+      if n == None:
+        n = prime + 1
+      else:
+        while n < prime:
+          yield n
+          n += 1
+        n += 1 # skip prime
 
     raise StopIteration()
