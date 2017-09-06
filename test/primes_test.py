@@ -45,9 +45,11 @@ class TestPrimes(unittest.TestCase):
     sieve = Sieve()
 
     self.assertEqual([4, 6, 8], list(itertools.islice(sieve.composites(), 0, 3)))
+    self.assertEqual([], list(sieve.composites(3)))
+    self.assertEqual([4], list(sieve.composites(5)))
     self.assertEqual([4, 6, 8, 9, 10], list(sieve.composites(12)))
     self.assertEqual([], list(sieve.composites(4, 3)))
-    self.assertEqual([8, 9, 10], list(sieve.composites(7, 12)))
+    self.assertEqual([6, 8, 9, 10, 12], list(sieve.composites(5, 13)))
 
 if __name__ == '__main__':
   unittest.main()

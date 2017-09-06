@@ -99,17 +99,23 @@ class PrimeIterator:
 
 class CompositeIterator:
   def __init__(self, start, stop, sieve):
-    self.primes = sieve.primes(start, stop)
+    self.start = start
+    self.stop = stop
+    self.sieve = sieve
 
+  # TODO: Should be able to simplify this by generating all numbers in range and omitting primes,
+  # except not sure how to do that with an open-ended range...
   def __iter__(self):
-    n = None
-    for prime in self.primes:
-      if n == None:
-        n = prime + 1
-      else:
-        while n < prime:
-          yield n
-          n += 1
-        n += 1 # skip prime
+    n = self.start
+    for prime in self.sieve.primes(self.start, self.stop):
+      while n < prime:
+        yield n
+        n += 1
+      n += 1 # skip prime
+
+    assert self.stop is not None, 'should never break out of loop if there is no stop'
+
+    for i in xrange(n, self.stop):
+      yield i
 
     raise StopIteration()
