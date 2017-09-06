@@ -22,9 +22,10 @@ class TestPrimes(unittest.TestCase):
   def test_sieve_nth(self):
     sieve = Sieve()
 
-    self.assertEqual(sieve.nth(0), 2)
-    self.assertEqual(sieve.nth(1), 3)
-    self.assertEqual(sieve.nth(10), 31)
+    self.assertEqual(sieve.nth(1), 2)
+    self.assertEqual(sieve.nth(2), 3)
+    self.assertEqual(sieve.nth(11), 31)
+    self.assertEqual(sieve.nth(10001), 104743)
 
   def test_sieve_primes_illegal(self):
     sieve = Sieve()

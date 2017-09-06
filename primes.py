@@ -46,13 +46,13 @@ class Sieve:
     # TODO: Binary search.
     for i, p in enumerate(self.sieve):
       if p >= n:
-        return i
+        return i + 1
 
     assert False, 'should always find something greater than or equal to the number given'
 
   def nth(self, i):
-    self._add_primes_until_index(i)
-    return self.sieve[i]
+    self._add_primes_until_index(i - 1)
+    return self.sieve[i - 1]
 
   def primes(self, *args):
     if len(args) == 0:
