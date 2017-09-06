@@ -13,33 +13,33 @@ def is_prime(n):
     return False
   else:
     # Not the most efficient, but okay for now.
-    for i in xrange(3, int(sqrt(n))):
+    for i in xrange(3, int(sqrt(n)), 2):
       if n % i == 0:
         return False
     return True
 
 class Sieve:
   def __init__(self):
-    self.sieve = [2]
+    self.sieve = [2, 3]
 
   def _is_prime(self, n):
     return all(n % p != 0 for p in self.sieve[:self.indexof(sqrt(n))])
 
   def _add_primes_until_value(self, n):
-    candidate = self.sieve[-1] + 1
+    candidate = self.sieve[-1] + 2
     while n > self.sieve[-1]:
       while not self._is_prime(candidate):
-        candidate += 1
+        candidate += 2
       self.sieve.append(candidate)
-      candidate += 1
+      candidate += 2
 
   def _add_primes_until_index(self, i):
-    candidate = self.sieve[-1] + 1
+    candidate = self.sieve[-1] + 2
     while len(self.sieve) <= i:
       while not self._is_prime(candidate):
-        candidate += 1
+        candidate += 2
       self.sieve.append(candidate)
-      candidate += 1
+      candidate += 2
 
   def indexof(self, n):
     self._add_primes_until_value(n)
