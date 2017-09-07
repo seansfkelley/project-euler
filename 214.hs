@@ -1,5 +1,4 @@
 import Data.Numbers.Primes
-import Data.Function
 import Data.Function.Memoize
 
 lowestDivisor :: Int -> [Int] -> Int
@@ -22,5 +21,17 @@ totient n | isPrime n = n - 1
 
 totientMemo = memoize totient
 
-main = print $ [x | x <- takeWhile (<40000000) primes,
-                        (length . filter (==1) . take 25 . iterate totientMemo $ x) == 1]
+chain :: Int -> [Int]
+chain 1 = [1]
+chain n = n:(chain $ totientMemo n)
+
+candidates = takeWhile (<40000000) primes
+
+-- Sanity check: do we generate the right 4-length chains?
+-- main = print $ map chain [5, 7, 8, 9, 10, 12, 14, 18]
+
+-- Timing baseline: how long does it take the get these primes?
+-- main = print $ length $ candidates
+
+-- Do the actual thing.
+main = print $ sum $ filter (\p -> (length . chain $ p) == 25) $ candidates
