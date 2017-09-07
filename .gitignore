@@ -1,3 +1,7 @@
 *.pyc
+*.hi
+*.o
 .DS_Store
 a.out
+.cabal-sandbox
+cabal.sandbox.config
