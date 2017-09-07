@@ -79,6 +79,18 @@ class Sieve:
     start, stop = self._range_args(*args)
     return CompositeIterator(start, stop, self)
 
+  def prime_factors(self, n):
+    factors = []
+    for p in self.primes():
+      while n % p == 0:
+        factors.append(p)
+        n /= p
+
+      if n == 1:
+        return factors
+
+    assert False, 'should not break out of loop without returning'
+
 class PrimeIterator:
   def __init__(self, start, stop, sieve):
     self.start = start

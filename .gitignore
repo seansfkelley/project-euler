@@ -1,6 +1,7 @@
 *.pyc
 *.hi
 *.o
+.vscode
 .DS_Store
 a.out
 .cabal-sandbox
