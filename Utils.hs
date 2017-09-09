@@ -27,3 +27,12 @@ factors =
 properDivisors n = filter (/=n) . factors $ n
 
 perfect n = n == (sum . properDivisors $ n)
+
+factorial 0 = 1
+factorial n = n * (factorial $ n - 1)
+
+splice n xs =
+  let
+    (ys, zs) = splitAt n xs
+  in
+    ys ++ (tail zs)
