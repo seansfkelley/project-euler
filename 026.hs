@@ -7,14 +7,26 @@ exactly articulate why.
 
 Some experiments on periodicity with Wolfram as an oracle:
 
-998 = 2 * 499 -> period 498
-997 = 997 -> period 166 (???)
+998 = 2 * 499        -> period 498
+997 = 997            -> period 166
 996 = 2 * 2 * 3 * 83 -> period 41
-995 = 5 * 199 -> period 99
-499 = 499 -> period 498
+995 = 5 * 199        -> period 99
+917 = 7 * 131        -> period 390
+786 = 2 * 3 * 131    -> period 130
+499 = 499            -> period 498
+498 = 2 * 3 * 83     -> period 41
+465 = 3 * 5 * 31     -> period 15
+241 = 241            -> period 30
 
-So there's some correlation between "largest prime factor" and the period, specifically. Sometimes
-it's p / 2 - 1 (e.g. 996), sometimes it's just p - 1 (e.g. 499), and sometimes I'm not sure (e.g. 997).
+It appears there's _some_ correlation between "largest prime factor minus 1" and the period,
+but no single pattern immediately jumps to mind.
+
+997 -> 997 -> (p - 1) / 6 -> 166
+996 -> 83  -> (p - 1) / 2 -> 41
+917 -> 131 -> (p - 1) * 3 -> 390
+786 -> 131 -> p - 1       -> 130
+499 -> 499 -> p - 1       -> 498
+241 -> 241 -> (p - 1) / 8 -> 30
 
 -}
 
