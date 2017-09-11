@@ -33,6 +33,10 @@ perfect n = n == (sum . properDivisors $ n)
 factorial 0 = 1
 factorial n = n * (factorial $ n - 1)
 
+countDigits :: Integral a => a -> Int
+countDigits 0 = 0 -- This is a weird base case but it's not really clear how best to define this for zero.
+countDigits n = 1 + countDigits (n `div` 10)
+
 splice n xs =
   let
     (ys, zs) = splitAt n xs
