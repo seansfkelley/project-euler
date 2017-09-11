@@ -37,6 +37,14 @@ countDigits :: Integral a => a -> Int
 countDigits 0 = 0 -- This is a weird base case but it's not really clear how best to define this for zero.
 countDigits n = 1 + countDigits (n `div` 10)
 
+nthDigit :: Int -> Int -> Int
+nthDigit i n =
+  let
+    l = countDigits n
+  in
+    -- MATH AHOY
+    (n `mod` (10 ^ (l - i))) `div` (10 ^ (l - i - 1))
+
 splice n xs =
   let
     (ys, zs) = splitAt n xs
