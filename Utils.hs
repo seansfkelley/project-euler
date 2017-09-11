@@ -17,6 +17,7 @@ cartesian (x:xs) = [(head:rest) | rest <- cartesian xs, head <- x]
 powerset [] = [[]]
 powerset (x:xs) = [s | rest <- powerset xs, s <- [rest, x:rest] ]
 
+factors :: Integral int => int -> [int]
 factors =
   map (foldr (*) 1) .
   cartesian .
@@ -24,6 +25,7 @@ factors =
   group .
   primeFactors
 
+properDivisors :: Integral int => int -> [int]
 properDivisors n = filter (/=n) . factors $ n
 
 perfect n = n == (sum . properDivisors $ n)
