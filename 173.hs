@@ -17,10 +17,40 @@ Since we know that rings are always mutiples of four in tile count, and laminae 
 
 The problem can then be reformulated as sum(count(n)) for n in [8,12..1000000].
 
+ALTERNATELY
+
+In the case of even-parity laminae, where every ring is 8i, we can divide all the values by 8 and restate this half of the problem as follows:
+
+    count(n) = how many different ways you can write each positive integer less than or equal to n as a sum of consecutive positive integers
+
+Some examples:
+
+    count(1) = 1; (1)
+    count(2) = 2; (1), (2)
+    count(3) = 4; (1), (2), (3), (1 + 2)
+    count(4) = 5; (1) ... (4), (1 + 2)
+    count(5) = 7; (1) ... (5), (1 + 2), (2 + 3)
+    count(6) = 9; (1) ... (6), (1 + 2), (2 + 3), (1 + 2 + 3)
+
+You could also approach this problem with "strictly equals" instead of "less than or equal", which would yield these values:
+
+    count'(1) = 1; (1)
+    count'(2) = 1; (2)
+    count'(3) = 2; (3), (1 + 2)
+    ...
+    count'(6) = 2; (6), (1 + 2 + 3)
+
+And therefore count(n) = sum(count'(i) for i in [1..n]).
+
+The easiest (but not necessarily fastest) way to generate this is probably something along the lines of:
+
+count = 0
+for i in [1..n]:
+  acc = 0
+  j = 0
+  while acc <= n:
+    acc += i + j
+    if acc <= n:
+      j += 1
+  count += j
 -}
-
-count n | n `mod` 8 == 0 = 0
-        | n `mod` 4 == 0 = 1
-        | otherwise = error "count can only be called on multiples of 4"
-
-main = print $ sum $ map count $ [8,12..1000000]
